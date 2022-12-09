@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+
+  # Backend
+  api:
+    build: ./randombeats/backend
+    container_name: api_backend
+
+    # set to port 5001
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./randombeats/backend:/app
+
+  # Frontend
+  client:
+    build: ./randombeats/frontend
+    depends_on:
+      - api
+    container_name: client_frontend
+    
+    # set to port 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./randombeats/frontend:/app
